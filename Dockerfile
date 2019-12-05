@@ -1,13 +1,20 @@
+# Nazwa obrazu kontenera
 FROM node:12
 
-LABEL maintainer="Daniel Kopaczel"
+# Ustala katalog roboczy
+WORKDIR /app
 
-WORKDIR /usr/src/app
+# Kopiujemy plik package.json ./ do katalogu roboczego
+COPY package*.json ./
 
+# Instaluje dodatkowe pakiety
 RUN npm install
 
+# Kopiuje wszystkie pozostałe pliki
 COPY . .
 
+# Określa port który będzie widoczny z zewnątrz
 EXPOSE 8080
 
-ENTRYPOINT ["node", "server.js"]
+# główny plik wykonywalny na kontenerze
+ENTRYPOINT [ "node", "server.js" ]
